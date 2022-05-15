@@ -3,9 +3,8 @@ name: "Pipe Terraform"
 on:
   push:
     branches:
-      - main
+      - '*'
   pull_request:
-
 jobs:
   terraform:
       uses: "yagoalmeida/cicd_tf_centralizado/.github/workflows/terraform_centralizado.yaml@main"
