@@ -1,0 +1,17 @@
+name: "Pipe Terraform"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  terraform:
+      uses: "yagoalmeida/cicd_tf_centralizado/.github/workflows/terraform_centralizado.yaml@main"
+      with:
+        tf_version: "1.0.9"
+        os_version: "ubuntu-20.04"
+      secrets:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
