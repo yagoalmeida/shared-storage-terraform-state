@@ -34,13 +34,13 @@ resource "aws_s3_bucket_public_access_block" "shared-storage-terraform-state" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket" "log-bucket" {
+resource "aws_s3_bucket" "shared-storage-terraform-state-log-bucket-dev" {
   depends_on = [aws_kms_key.kms]
-  bucket     = "log-bucket"
+  bucket     = "shared-storage-terraform-state-log-bucket-dev"
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "log-bucket" {
-  bucket = aws_s3_bucket.log-bucket.bucket
+resource "aws_s3_bucket_server_side_encryption_configuration" "shared-storage-terraform-state-log-bucket-dev" {
+  bucket = aws_s3_bucket.shared-storage-terraform-state-log-bucket-dev.bucket
 
   rule {
     apply_server_side_encryption_by_default {
@@ -50,29 +50,29 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "log-bucket" {
   }
 }
 
-resource "aws_s3_bucket_versioning" "log-bucket" {
-  bucket = aws_s3_bucket.log-bucket.id
+resource "aws_s3_bucket_versioning" "shared-storage-terraform-state-log-bucket-dev" {
+  bucket = aws_s3_bucket.shared-storage-terraform-state-log-bucket-dev.id
   versioning_configuration {
     status = "Enabled"
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "log-bucket" {
-  bucket                  = aws_s3_bucket.log-bucket.id
+resource "aws_s3_bucket_public_access_block" "shared-storage-terraform-state-log-bucket-dev" {
+  bucket                  = aws_s3_bucket.shared-storage-terraform-state-log-bucket-dev.id
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_acl" "log-bucket" {
-  bucket = aws_s3_bucket.log-bucket.id
+resource "aws_s3_bucket_acl" "shared-storage-terraform-state-log-bucket-dev" {
+  bucket = aws_s3_bucket.shared-storage-terraform-state-log-bucket-dev.id
   acl    = "log-delivery-write"
 }
 
-resource "aws_s3_bucket_logging" "log-bucket" {
+resource "aws_s3_bucket_logging" "shared-storage-terraform-state-log-bucket-dev" {
   bucket = aws_s3_bucket.shared-storage-terraform-state.id
 
-  target_bucket = aws_s3_bucket.log-bucket.id
+  target_bucket = aws_s3_bucket.shared-storage-terraform-state-log-bucket-dev.id
   target_prefix = "log/"
 }
