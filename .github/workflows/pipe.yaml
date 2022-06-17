@@ -7,7 +7,7 @@ on:
   pull_request:
 jobs:
   terraform:
-      uses: "yagoalmeida/cicd_tf_centralizado/.github/workflows/terraform_centralizado.yaml@main"
+      uses: "yagoalmeida/terraform_actions/.github/workflows/terraform_actions.yaml@main"
       with:
         tf_version: "1.0.9"
         os_version: "ubuntu-20.04"
